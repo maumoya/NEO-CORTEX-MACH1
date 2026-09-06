@@ -1,0 +1,4 @@
+export type ActorRole = 'owner'|'admin'|'operator'|'viewer'|'agent';
+export interface ActorIdentity { actorId: string; role: ActorRole; sessionId: string; deviceId?: string; authenticated: boolean; mfaSatisfied: boolean; trustedDevice: boolean; }
+export interface IdentityDecision { allowed: boolean; reasonCodes: string[]; }
+export function evaluateIdentity(identity: ActorIdentity, highRisk: boolean): IdentityDecision { const reasons: string[] = []; if (!identity.authenticated) reasons.push('authentication_required'); if (highRisk && !identity.mfaSatisfied) reasons.push('mfa_required'); if (highRisk && !identity.trustedDevice) reasons.push('trusted_device_required'); if (identity.role === 'viewer' && highRisk) reasons.push('viewer_cannot_execute_high_risk_action'); return { allowed: reasons.length === 0, reasonCodes: reasons }; }

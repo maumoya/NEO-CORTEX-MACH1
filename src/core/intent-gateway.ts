@@ -1,0 +1,5 @@
+import type { DataClass } from './data-classification';
+export const INTENTS = ['coding','research','finance','accounting','business','legal','compliance','cybersecurity','creative','marketing','design','personal','administrative','communication','social','values','automation','data_analysis','company_creation','investing','project_management','health','document','image','software_development','unknown'] as const;
+export type Intent = (typeof INTENTS)[number];
+export interface IntentDecision { intent: Intent; dataClass: DataClass; needsWeb: boolean; needsTools: boolean; needsAgents: boolean; preferLocal: boolean; approvalRequired: boolean; confidence: number; }
+export function validateIntentDecision(decision: IntentDecision): IntentDecision { if (decision.confidence < 0 || decision.confidence > 1) throw new Error('Intent confidence must be between 0 and 1'); const highRiskIntent = new Set<Intent>(['finance','legal','compliance','cybersecurity','investing','health']); if (highRiskIntent.has(decision.intent) && !decision.approvalRequired) return { ...decision, approvalRequired: true }; return decision; }

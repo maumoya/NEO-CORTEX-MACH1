@@ -1,0 +1,3 @@
+import { getLiveModels } from '../model-router';
+export interface EvolutionCycleSummary{startedAt:string;modelCatalogCount:number;actions:string[];warnings:string[];}
+export async function runEvolutionCycle():Promise<EvolutionCycleSummary>{const startedAt=new Date().toISOString();const models=await getLiveModels();return{startedAt,modelCatalogCount:models.length,actions:['Fetched live AI Gateway model catalog','No code installed','No production deployment promoted'],warnings:['Persistent candidate state is not implemented yet.','Upstream executable discovery must be wired to quarantine before use.']};}

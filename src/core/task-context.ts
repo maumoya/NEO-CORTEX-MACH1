@@ -1,0 +1,5 @@
+import type { DataClass } from './data-classification';
+export interface TaskBudget { maxTurns: number; maxToolCalls: number; maxRetries: number; maxWallClockMs: number; maxEstimatedUsd: number; }
+export interface TaskContext { taskId: string; correlationId: string; createdAt: string; dataClass: DataClass; budget: TaskBudget; approvalRequired: boolean; }
+function randomId(prefix: string): string { return `${prefix}_${crypto.randomUUID()}`; }
+export function createTaskContext(input: { dataClass: DataClass; budget?: Partial<TaskBudget>; approvalRequired?: boolean; }): TaskContext { return { taskId: randomId('task'), correlationId: randomId('corr'), createdAt: new Date().toISOString(), dataClass: input.dataClass, approvalRequired: input.approvalRequired ?? false, budget: { maxTurns: input.budget?.maxTurns ?? 12, maxToolCalls: input.budget?.maxToolCalls ?? 30, maxRetries: input.budget?.maxRetries ?? 3, maxWallClockMs: input.budget?.maxWallClockMs ?? 120_000, maxEstimatedUsd: input.budget?.maxEstimatedUsd ?? 2 } }; }

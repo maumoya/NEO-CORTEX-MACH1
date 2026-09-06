@@ -1,0 +1,9 @@
+version: 1
+principle: "Use official APIs and authorized accounts; do not bypass access controls or platform protections."
+pipeline: [ingest_metadata, ingest_permitted_text, ingest_permitted_media, transcribe_audio, vision_analysis, language_detection, entity_topic_sentiment_extraction, cross_source_deduplication, summarize, recommend_action, policy_gate, execute_if_allowed, receipt]
+platforms:
+  x: {modes: [recent_search, filtered_stream, public_post_lookup, authorized_actions]}
+  tiktok: {modes: [authorized_display_api, approved_content_posting], research_api: eligibility_required}
+  facebook: {modes: [official_meta_api_where_permissions_allow]}
+  instagram: {modes: [official_meta_api_where_permissions_allow]}
+prohibited: [bypass_authentication, scrape_private_accounts, evade_rate_limits, defeat_anti_bot_controls, impersonate_user_without_authorization, covert_private_message_surveillance]

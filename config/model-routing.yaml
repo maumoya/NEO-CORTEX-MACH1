@@ -1,0 +1,35 @@
+version: 1
+objective_weights:
+  quality: 0.36
+  security_privacy: 0.20
+  tool_reliability: 0.14
+  latency: 0.10
+  cost: 0.12
+  context_fit: 0.08
+task_tiers:
+  fast:
+    examples: [classification, extraction, routing, summarization]
+    max_reasoning: low
+    prefer: [low_cost, low_latency]
+  standard:
+    examples: [research, routine_coding, analysis, drafting]
+    max_reasoning: medium
+    prefer: [balanced]
+  frontier:
+    examples: [architecture, difficult_debugging, security_review, high_stakes_reasoning]
+    max_reasoning: high
+    prefer: [reasoning, tool_use]
+  multimodal:
+    examples: [image_analysis, video_analysis, audio_understanding, social_media]
+    require_any: [vision, audio, multimodal]
+  simulation:
+    examples: [mirofish, scenario_population_modeling]
+    prefer: [throughput, structured_output]
+    isolation_required: true
+routing:
+  live_catalog: true
+  fallback_models: true
+  hardcoded_single_provider: false
+  enforce_budget: true
+  log_selected_model: true
+  benchmark_before_promotion: true

@@ -1,0 +1,24 @@
+version: 1
+deny: [self_approve_privilege_escalation, disable_supervisor, erase_audit_log, export_secrets, execute_unscanned_upstream_code, install_unpinned_dependency, bypass_sandbox_for_unknown_code, production_promote_without_policy_gate]
+candidate_pipeline: [provenance, license, commit_or_release_pin, checksum, manifest_diff, secret_scan, dependency_vulnerability_scan, static_analysis, prompt_injection_scan, mcp_capability_analysis, sandbox_runtime_probe, filesystem_diff, network_egress_diff, regression_evals, security_evals, cost_latency_benchmark, human_or_policy_approval, preview_deploy, canary, production_promote]
+mcp:
+  deterministic_capability_assessor: wdm0006/mcp-sentinel
+  build_time_scanner: BashaarJavaid/MCP-Sentinel
+  long_running_polling_helper: GCS-ZHN/mcp-sentinel
+sandbox:
+  secrets: none
+  persistence: none
+  outbound_network: deny_by_default
+  filesystem: disposable
+  capture_process_tree: true
+  capture_network: true
+  capture_file_changes: true
+external_actions:
+  read_public_data: auto_if_permitted
+  summarize: auto
+  draft_response: auto
+  publish_post: approval
+  send_dm: approval
+  follow_unfollow: approval
+  delete_content: strong_approval
+  account_security_change: prohibited_for_agents

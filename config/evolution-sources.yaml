@@ -1,0 +1,16 @@
+version: 1
+sources:
+  - {id: openai-agents-sdk, type: official_docs_and_release, trust: first_party, url: https://openai.github.io/openai-agents-js/, action: evaluate}
+  - {id: vercel-platform, type: official_docs_and_model_catalog, trust: first_party, url: https://ai-gateway.vercel.sh/v1/models, action: evaluate}
+  - {id: ecc, type: github, trust: third_party_open_source, repo: affaan-m/ECC, pin_required: true, action: quarantine}
+  - {id: matt-pocock-skills, type: github, trust: third_party_open_source, repo: mattpocock/skills, pin_required: true, action: quarantine}
+  - {id: mirofish, type: github, trust: third_party_open_source, repo: 666ghj/MiroFish, pin_required: true, action: quarantine, lane: simulation}
+  - {id: mcp-sentinel-capabilities, type: github, trust: third_party_open_source, repo: wdm0006/mcp-sentinel, pin_required: true, action: quarantine}
+  - {id: mcp-sentinel-build-scan, type: github, trust: third_party_open_source, repo: BashaarJavaid/MCP-Sentinel, pin_required: true, action: quarantine}
+  - {id: mcp-sentinel-polling, type: github, trust: third_party_open_source, repo: GCS-ZHN/mcp-sentinel, pin_required: true, action: quarantine, purpose: token_free_polling}
+rules:
+  auto_adopt_documentation_only: false
+  auto_execute_new_code: false
+  auto_install_skill: false
+  auto_install_mcp: false
+  auto_promote_production: false
