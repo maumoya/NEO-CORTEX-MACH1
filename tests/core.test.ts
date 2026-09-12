@@ -6,7 +6,7 @@ import { mayPersistRawPayload, requiresPrivateOrExplicitlyApprovedInference } fr
 import { evaluateIdentity } from '../src/core/identity';
 import { validateIntentDecision, type IntentDecision } from '../src/core/intent-gateway';
 import { assertMayMutateExternalState } from '../src/core/kill-switch';
-import { evaluatePolicy } from '../src/core/policy-kernel';
+import { evaluatePolicy, mayExecuteWithoutApproval } from '../src/core/policy-kernel';
 import { validateSandboxRequest } from '../src/core/sandbox';
 import { initialDecision, mayAutoExecute } from '../src/evolution/policy';
 import { routeFromCatalog } from '../src/model-router';
@@ -104,4 +104,51 @@ test('model routing is deterministic, classification-aware, and does not prefer 
   assert.equal(fast.recommendation?.id, 'alpha/cheap');
   const restricted = routeFromCatalog(catalog, { taskClass: 'fast', dataClass: 'RESTRICTED', needsTools: true, approvedProviders: ['beta'] });
   assert.deepEqual(restricted.eligible.map(model => model.id), ['beta/unknown-price']);
+});
+
+test('restricted network egress with a missing provider fails closed', () => {
+  const intent = { ...publicCodingIntent, dataClass: 'SECRET' as const };
+  assert.equal(evaluatePolicy({ intent, requestedCapabilities: ['network.outbound'] }).allowed, false);
+  assert.equal(evaluatePolicy({ intent, requestedCapabilities: [] }).allowed, true);
+});
+
+test('allowed policy decisions do not discharge outstanding human approval', () => {
+  const intent = validateIntentDecision({ ...publicCodingIntent, intent: 'finance', dataClass: 'FINANCIAL' });
+  const checkout = evaluatePolicy({ intent, requestedCapabilities: ['network.outbound'], targetProvider: 'stripe', approvedProviders: ['stripe'] });
+  assert.equal(checkout.allowed, true);
+  assert.equal(checkout.requiresHumanApproval, true);
+  assert.equal(mayExecuteWithoutApproval(checkout), false);
+  assert.equal(mayExecuteWithoutApproval(evaluatePolicy({ intent: publicCodingIntent, requestedCapabilities: [] })), true);
+});
+
+test('invalid budget numbers, fractional counters and future start times fail closed', () => {
+  const budget = { maxTurns: 2, maxToolCalls: 3, maxRetries: 1, maxWallClockMs: 1000, maxEstimatedUsd: 1 };
+  const usage = { turns: 0, toolCalls: 0, retries: 0, startedAtMs: Date.now(), estimatedUsd: 0 };
+  for (const value of [NaN, Infinity, -1]) {
+    assert.equal(evaluateBudget({ ...budget, maxEstimatedUsd: value }, usage).allowed, false);
+    assert.equal(evaluateBudget(budget, { ...usage, estimatedUsd: value }).allowed, false);
+  }
+  assert.equal(evaluateBudget(budget, { ...usage, turns: 0.5 }).allowed, false);
+  assert.equal(evaluateBudget(budget, { ...usage, startedAtMs: Date.now() + 60_000 }).allowed, false);
+});
+
+test('unknown-price ties are stable regardless of catalog order', () => {
+  const models = [{ id: 'z/model' }, { id: 'a/model' }, { id: 'm/model' }];
+  for (const catalog of [models, [...models].reverse(), [models[1], models[0], models[2]]]) {
+    assert.deepEqual(routeFromCatalog(catalog, { taskClass: 'fast', dataClass: 'PUBLIC' }).eligible.map(model => model.id),
+      ['a/model', 'm/model', 'z/model']);
+  }
+});
+
+test('invalid pricing, metadata and request ceilings cannot imply free eligible inference', () => {
+  const catalog = [
+    { id: 'a/negative', pricing: { input: '-1' } }, { id: 'b/blank', pricing: { input: '  ' } },
+    { id: 'c/unknown', pricing: { input: 'NaN' } }, { id: 'd/free', pricing: { input: '0' } },
+    { id: 'e/bad-context', context_window: Infinity, pricing: { input: '0' } }
+  ];
+  const request = { taskClass: 'fast' as const, dataClass: 'PUBLIC' as const, maxInputCostPerToken: 0 };
+  assert.deepEqual(routeFromCatalog(catalog, request).eligible.map(model => model.id), ['d/free']);
+  for (const value of [NaN, Infinity, -1]) {
+    assert.throws(() => routeFromCatalog(catalog, { ...request, maxInputCostPerToken: value }), /Invalid model route/);
+  }
 });

@@ -1,4 +1,5 @@
-import { requiresPrivateOrExplicitlyApprovedInference, type DataClass } from './core/data-classification';
+import { z } from 'zod';
+import { DATA_CLASSES, requiresPrivateOrExplicitlyApprovedInference, type DataClass } from './core/data-classification';
 
 export type TaskClass = 'fast' | 'standard' | 'frontier' | 'multimodal' | 'simulation';
 export interface GatewayModel {
@@ -20,10 +21,23 @@ export interface RouteRequest {
   approvedProviders?: string[];
 }
 
+const gatewayModelSchema = z.object({
+  id: z.string().min(1).max(256), type: z.string().optional(),
+  context_window: z.number().int().nonnegative().optional(), max_tokens: z.number().int().nonnegative().optional(),
+  tags: z.array(z.string()).max(100).optional(),
+  pricing: z.object({ input: z.string().optional(), output: z.string().optional() }).optional()
+});
+const routeRequestSchema = z.object({
+  taskClass: z.enum(['fast', 'standard', 'frontier', 'multimodal', 'simulation']), dataClass: z.enum(DATA_CLASSES),
+  needsVision: z.boolean().optional(), needsAudio: z.boolean().optional(), needsTools: z.boolean().optional(),
+  minimumContext: z.number().int().nonnegative().optional(), maxInputCostPerToken: z.number().nonnegative().optional(),
+  approvedProviders: z.array(z.string().min(1)).optional()
+}).strict();
+
 function numericCost(value?: string): number {
-  if (value === undefined || value === '') return Number.POSITIVE_INFINITY;
+  if (value === undefined || value.trim() === '') return Number.POSITIVE_INFINITY;
   const number = Number(value);
-  return Number.isFinite(number) ? number : Number.POSITIVE_INFINITY;
+  return Number.isFinite(number) && number >= 0 ? number : Number.POSITIVE_INFINITY;
 }
 
 function providerFromModelId(id: string): string {
@@ -31,10 +45,14 @@ function providerFromModelId(id: string): string {
 }
 
 export async function getLiveModels(): Promise<GatewayModel[]> {
-  const response = await fetch('https://ai-gateway.vercel.sh/v1/models', { cache: 'no-store' });
+  const response = await fetch('https://ai-gateway.vercel.sh/v1/models', {
+    cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(5000)
+  });
   if (!response.ok) throw new Error('Model catalog failed: ' + response.status);
   const body = await response.json();
-  return body.data ?? [];
+  const parsed = z.object({ data: z.array(gatewayModelSchema).max(10_000) }).safeParse(body);
+  if (!parsed.success) throw new Error('Invalid model catalog response.');
+  return parsed.data.data;
 }
 
 function preferenceTuple(model: GatewayModel, taskClass: TaskClass): readonly number[] {
@@ -51,16 +69,20 @@ function compareModels(leftModel: GatewayModel, rightModel: GatewayModel, taskCl
   const left = preferenceTuple(leftModel, taskClass);
   const right = preferenceTuple(rightModel, taskClass);
   for (let index = 0; index < Math.max(left.length, right.length); index += 1) {
-    const delta = (left[index] ?? 0) - (right[index] ?? 0);
-    if (delta !== 0) return delta;
+    const leftValue = left[index] ?? 0;
+    const rightValue = right[index] ?? 0;
+    if (leftValue !== rightValue) return leftValue < rightValue ? -1 : 1;
   }
-  return leftModel.id.localeCompare(rightModel.id);
+  return leftModel.id === rightModel.id ? 0 : leftModel.id < rightModel.id ? -1 : 1;
 }
 
 export function routeFromCatalog(models: GatewayModel[], request: RouteRequest) {
+  if (!routeRequestSchema.safeParse(request).success) throw new Error('Invalid model route request.');
+  if (!Array.isArray(models) || models.length > 10_000) throw new Error('Invalid model catalog.');
   const approvedProviders = new Set(request.approvedProviders ?? []);
   const restricted = requiresPrivateOrExplicitlyApprovedInference(request.dataClass);
   const eligible = models.filter((model) => {
+    if (!gatewayModelSchema.safeParse(model).success) return false;
     const tags = new Set(model.tags ?? []);
     const provider = providerFromModelId(model.id);
     if (model.type && model.type !== 'language') return false;

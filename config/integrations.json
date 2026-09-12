@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "authority": "neo-policy-kernel",
+  "runtimeDispatchImplemented": false,
+  "integrations": [
+    { "id": "ecc", "kind": "instruction-profile", "status": "curated-profile-ready", "source": "https://github.com/affaan-m/ECC", "profile": "config/ecc-profile.json", "executableEnabled": false },
+    { "id": "loops", "kind": "supervisor-skill", "status": "instruction-ready", "skill": ".claude/skills/neo-loops/SKILL.md", "executableEnabled": false },
+    { "id": "agent-reach", "kind": "social-worker", "status": "activation-pending", "source": "https://github.com/Panniantong/Agent-Reach", "skill": ".claude/skills/neo-agent-reach/SKILL.md", "allowedInitialOperations": ["public.read", "public.search"], "executableEnabled": false },
+    { "id": "openclicky", "kind": "mac-worker", "status": "not-connected", "applicationPath": "/Applications/OpenClicky.app", "skill": ".claude/skills/neo-openclicky/SKILL.md", "allowedInitialOperations": ["project.inventory"], "executableEnabled": false },
+    { "id": "obsidian", "kind": "knowledge-workspace", "status": "selected-not-connected", "source": "https://obsidian.md", "executableEnabled": false },
+    { "id": "graphify", "kind": "derived-index", "status": "canary-pending", "source": "https://github.com/Graphify-Labs/graphify", "executableEnabled": false },
+    { "id": "orbit", "kind": "unresolved", "status": "exact-source-required", "source": null, "executableEnabled": false },
+    { "id": "paper-v8-polisher", "kind": "research-skill", "status": "instruction-ready", "skill": ".claude/skills/paper-v8-polisher/SKILL.md", "executableEnabled": false }
+  ]
+}

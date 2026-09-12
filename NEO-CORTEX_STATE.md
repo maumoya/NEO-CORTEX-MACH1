@@ -2,82 +2,68 @@
 
 Last updated: 2026-09-12 UTC  
 Canonical repository: `maumoya/NEO-CORTEX-MACH1`  
-Verified commit: `7ec17caa20b277345237a07a9444de769daff3d3`
-Prepared candidate: `0.3.1` (local, not published)
+Release snapshot: `0.4.0`
+Verified public baseline: `dc164dcaeb6f10c35c2bfff3706c3b9f382d0ef1` (0.3.1)
+Publication: 0.4.0 prepared under the owner's explicit GitHub instruction; final publication/CI receipt pending.
 
 ## Evidence boundary
 
-This snapshot distinguishes verified repository evidence from unverified machine state.
+The repository is available in a Linux development workspace, not on the owner's Mac mini. Mac filesystem, OpenClicky process/configuration/permissions, NIM model selection, phones and other devices remain unverified. Skill files do not confer computer-use access. No Mac delegation or paid inference occurred.
 
-- **Verified here:** GitHub default branch and history, repository files, dependency resolution, TypeScript checks, production build, dependency audit, and repository secret-pattern scan.
-- **Not reachable from this session:** the Mac mini filesystem, uncommitted Mac changes, `/Applications/OpenClicky.app`, OpenClicky runtime/memory/logs, macOS permissions, Keychain, launch agents, local models, and local services.
-- Local-machine claims remain `UNKNOWN` until a Mac execution/desktop bridge is attached. They must not be inferred from documentation or UI demo data.
+Four targeted GPT-context searches recovered partial historical excerpts. All three later supplied source documents were read and retained in `docs/source/`. This is not an exhaustive ChatGPT archive. The accepted synthesis is `docs/AGENTIC-OS-FRAMEWORK.md`; original executable bootstrap and exact Orbit project remain unavailable.
 
-## Verification baseline
+## Verification receipt
 
-| Check | Result | Evidence |
+| Check | Result | Scope |
 |---|---|---|
-| Repository access | PASS | GitHub connection confirms admin/push access to the public repository |
-| Git history | PASS | Two commits; current `main` tip is `7ec17ca` |
-| Dependency install | PASS | Exact declared versions resolved with lifecycle scripts disabled |
-| TypeScript | PASS | `npm run typecheck` |
-| Production build | PASS | `npm run build`; 11 routes generated |
-| Dependency audit | PASS | `npm audit --omit=dev --audit-level=moderate`; zero reported vulnerabilities |
-| Secret-pattern scan | PASS | No likely committed credentials found |
-| Automated tests | PASS | Ten core policy, safety, and routing regression tests pass |
-| CI | READY, NOT PUBLISHED | Least-privilege workflow prepared with commit-pinned actions |
-| Commit verification | WARN | Both commits are unsigned |
-| HTTP smoke test | PASS | `/dashboard` 200 with demo banner; unconfigured Checkout 503; unauthorized evolution cron 401 |
+| Dependency lock | PASS | Pinned install with lifecycle scripts disabled; Node 24.19 used, supported range >=24.14 <25 |
+| TypeScript / build | PASS | Production build includes /api/agent and /console |
+| Regression tests | PASS | 38 core, persistent-runtime, HTTP and demo-boundary tests |
+| Durable lifecycle | PASS | Separate-process reopen, competing-process duplicate reservation, terminal immutability and interrupted-work recovery |
+| Security boundaries | PASS within tested scope | Test identities, schema/origin/role gates, ownership, journal/index changes, finite budgets/prices and unresolved approval denial |
+| ECC profile | PASS | Upstream commit, MIT attribution and local skill digests; no upstream executables/hooks imported |
+| Skill validation | PASS | Seven project skill entrypoints validated |
+| Built-app HTTP smoke | PASS | Disabled console/runtime, labeled dashboards, unconfigured Checkout 503 and unauthenticated cron 401 |
+| Secret-pattern scan / dependency audit | PASS | No matched secret patterns; zero reported production dependency vulnerabilities |
+| Public 0.3.1 CI | PASS | Verify run 34715661764, commit dc164dc |
+| New release CI | PENDING PUBLICATION | Local verification passed; remote result must be checked after push |
+| Research schedules | VERIFIED ENABLED | Existing hourly Upgrade Watch and Monday around 09:00 America/New_York Weekly Evolution updated |
+| Live accounts / Mac / devices | NOT VERIFIED | No live Clerk, Stripe, OpenClicky, NIM or device enrollment test |
 
-## Current architecture
+Tests and source scans are evidence for their stated cases, not proof of comprehensive security, live account activation or complete Agentic OS functionality.
 
-### Product surface
+## Architecture and subsystem state
 
-- Next.js 16 / React 19 application with landing, pricing, updates, support, customer dashboard, founder backoffice, and sign-in routes.
-- Clerk is an optional identity boundary. Without keys, protected pages intentionally render demo mode.
-- Stripe Checkout and webhook endpoints fail closed when credentials are absent.
-- A Postgres-compatible schema exists, but the application does not connect to it.
-- Dashboard, CRM, revenue, customer, and agent-health numbers are seeded demo data.
-
-### Agentic control-plane seed
-
-- Typed contracts exist for intent, data classification, identity, policy, budgets, kill switch, sandbox requests, secret leases, checkpoints, and execution receipts.
-- The model router fetches the public Vercel AI Gateway catalog and filters on hard requirements.
-- The evolution endpoint fetches the model catalog and returns a summary; it does not discover, persist, scan, evaluate, install, promote, or roll back candidates.
-- The OpenAI council integration is an empty placeholder.
-- Agent roles are documented, but there is no durable agent registry or orchestrator runtime.
-
-## Subsystem status
-
-| Subsystem | Status | Current reality |
+| Subsystem | State | Current implementation / gap |
 |---|---|---|
-| Architecture | PARTIAL | Modular contracts and product shell exist; runtime wiring is largely absent |
-| Bootstrap/install | REPO PASS / MAC UNKNOWN | Cloud verification succeeds; no Mac bootstrap script or Mac install evidence in the repository |
-| Models | PARTIAL | Vercel catalog filter only; no NVIDIA NIM, GPT-OSS, or local inference adapter |
-| Agents | PLANNED | Roles documented; no executable director/council/worker lifecycle |
-| Memory | PLANNED | In-memory checkpoint class only; no durable typed/vector/graph memory |
-| Tools | PLANNED | Capability vocabulary exists; no tool registry, broker, or OpenClicky adapter |
-| Security | PARTIAL | Strong policy contracts/config; no end-to-end enforcement or security test harness |
-| Permissions | MAC UNKNOWN | No verified macOS Accessibility, Screen Recording, Automation, or Full Disk Access state |
-| Networking | PARTIAL | Direct model-catalog fetch; no enforced egress broker/allowlist runtime |
-| Automation | PARTIAL | Vercel cron calls evolution daily; durable queues, idempotency, and retry state are absent |
-| Self-healing | PLANNED | Kill switch/checkpoint contracts exist; no watchdog, recovery controller, or restore testing |
-| Observability | PLANNED | Receipt types and demo metrics exist; no persistent logs, traces, SLOs, alerts, or tamper evidence |
-| Documentation | PARTIAL | Vision and policies are documented; operating/runbook/API documentation is incomplete |
-| Git/GitHub | PARTIAL | Canonical repo is clean remotely; CI, branch policy verification, signed commits, and release automation are absent |
-| SaaS product | MVP DEMO | UI builds; auth, billing persistence, entitlements, CRM ingestion, and real metrics are incomplete |
+| Architecture | PARTIAL | Modular Next.js product/control-plane seed; one identity and logical memory architecture documented |
+| Bootstrap/install | REPO VERIFIED / MAC UNKNOWN | Node dependencies build here; no verified Mac bootstrap or local-model install |
+| Models | PARTIAL | Catalog filtering, finite cost checks, deterministic ranking and timed fixed-origin fetch; NIM/local inference adapter pending |
+| Agents | PARTIAL | Deterministic admin Director accepts only status/next; council and general worker orchestration pending |
+| Memory | PARTIAL FOUNDATION | Durable local task journal; no operational personal/semantic/vector memory. Obsidian selected; Graphify planned derived index |
+| Tools | CONTRACTS | Static registry and Agent-Reach/OpenClicky skills; no runtime dispatch or authenticated platform adapter |
+| ECC environment | CURATED PROFILE READY | Three pinned instruction adaptations plus MIT license; host CLI/global settings and full plugin install not verified |
+| Security | PARTIAL | Auth/policy/input boundaries for Director; Checkout blocked without trusted approval. General broker/egress/sandbox enforcement pending |
+| Permissions | MAC UNKNOWN | No observed Accessibility, Screen Recording, Automation or Full Disk Access state |
+| Networking/devices | PLANNED | Private HTTPS, shared identity/workspace, device registration/revocation and thin clients documented; no devices enrolled |
+| Automation | PARTIAL | Real ChatGPT research schedules enabled; separate Vercel daily catalog cron remains narrow |
+| Self-healing | PARTIAL | Interrupted local tasks marked failed on next execution; no daemon, watchdog, replay scheduler or host recovery controller |
+| Observability | PARTIAL | Local hash-chained task events and row/index consistency; no external anchoring, full traces, alerts or live telemetry |
+| Documentation | UPDATED | Framework, runbook, all supplied source inputs, candidate queue, provenance and persistent state |
+| Git/GitHub | ACTIVE | Owner-authorized publication; pinned-action CI exists. Main is unprotected in observed metadata; commits unsigned |
+| SaaS product | DEMO | Always-labeled metrics/CRM/revenue; real billing state, entitlements and data adapters absent |
 
-## Known inconsistencies and risks
+## Material limitations
 
-1. The repository markets a functioning Agentic OS, but most control-plane elements are interfaces or policy documents rather than integrated runtime behavior.
-2. Demo dashboards can be reached without authentication when Clerk is unconfigured. They are clearly labeled, but must never be confused with live operational telemetry.
-3. The Stripe webhook verifies signatures but does not persist events, update entitlements, or implement idempotency.
-4. Checkout is now prepared to bind sessions to authenticated users and enforce execution/policy gates, but this has not been exercised with live Clerk or Stripe credentials.
-5. The evolution cron is scheduled daily, while the migration manifest describes weekly evolution and upgrade-watch automation.
-6. Core tests and a CI gate now exist locally; SBOM, provenance, integration tests, and a broader security regression harness remain missing.
-7. Runtime policy functions are not placed in front of every API/tool/external mutation path.
-8. Mac/OpenClicky state cannot be verified from this session, so local autonomy is blocked even though repository work is available.
+- Runtime is opt-in and disabled on Vercel until a shared durable store exists. Only its own task journal is writable; fixed workload operations have zero model calls/tools/spend.
+- A hash chain can detect tested changes but cannot stop a database/host owner rewriting the entire chain or a consistent suffix. Backups, external anchors and migrations remain.
+- Admin HTTP tests inject synthetic identities; they do not prove a live Clerk account. Cancel/deadline behavior does not yet control a general subprocess worker.
+- Corrected the 0.3.1 Checkout approval-header claim. Credentials, normal mode and an allowed capability do not prove human approval.
+- Seeded dashboard numbers remain examples even when environment keys are configured. The AST guard checks a specific source pattern; it is not visual or comprehensive telemetry provenance proof.
+- Orbit identity is unresolved. No guessed repository or redundant authoritative memory store was installed.
+- Historical upgrade reports are retained as proposals. No provider/API/package upgrade or platform login was silently activated.
+- Continuous research is scheduled; an always-running local execution loop has not been deployed.
 
-## Immediate target state
+## Next execution boundary
 
-Establish a trustworthy development spine before expanding features: reproducible installs, automated tests, CI verification, integrated policy enforcement, durable execution records, then a narrow OpenClicky worker adapter with explicit capabilities and receipts.
+Complete publication/CI verification for this release, then follow the implementation sequence in the framework. Actual Mac attachment is required for inventory, OpenClicky delegation and local device activation. Private memory must remain outside this public repository.

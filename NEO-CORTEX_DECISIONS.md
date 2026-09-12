@@ -63,3 +63,51 @@ This is an append-only decision record. Superseded decisions stay visible and mu
 - **Decision:** The first OpenClicky integration will be a narrow worker adapter, not a second supervisor.
 - **Reason:** The project needs one source of task authority and one deterministic policy boundary.
 - **Consequence:** Initial capabilities should be local read, bounded command execution, file patching, build/test, and GUI tasks. Each job needs a task ID, timeout, allowlist, result artifact references, and independent verification.
+
+## D-011 — Recover history without upgrading proposals into facts
+
+- **Decision:** Retain retrieved requirements and all three supplied source documents with evidence labels; use `docs/AGENTIC-OS-FRAMEWORK.md` as their accepted synthesis.
+- **Reason:** Earlier watch reports recommended canaries but did not install them. Retrieval did not provide an exhaustive GPT archive.
+- **Consequence:** Unverified versions/performance and unavailable Mac state remain explicit; no private chat dump is imported into public memory.
+
+## D-012 — Approval requires server evidence
+
+- **Decision:** Remove the caller-controlled Checkout approval header and block Checkout while server-side approval is absent.
+- **Reason:** 0.3.1 checked `allowed` but did not discharge `requiresHumanApproval`; a client header is forgeable.
+- **Consequence:** Authentication, credentials and normal execution mode alone cannot activate billing. A future approval must bind user/action/plan, expiry and single-use consumption.
+
+## D-013 — Narrow durable Director first
+
+- **Decision:** Implement only deterministic `status` and `next` with local SQLite task receipts, not arbitrary prompts/tools. Zero inference spend.
+- **Reason:** This establishes tested identity, idempotency, lifecycle, restart and audit behavior before adding side-effecting workers.
+- **Consequence:** Opt-in self-hosted runtime only; Vercel is disabled until shared durable storage exists. Hash-chain checks are not tamper-proof against a host owner.
+
+## D-014 — One logical brain, multiple specialized memory areas
+
+- **Decision:** NEO owns identity, operational records and policy. Obsidian owns readable knowledge content; Graphify provides a rebuildable source-linked projection. Orbit is optional pending exact identification.
+- **Reason:** These tools serve different functions. Independent authoritative copies would create conflicts and duplicate work.
+- **Consequence:** Use owner/workspace IDs, namespaces, revisions, provenance, retention and explicit synchronization conflicts. All devices use the same API and memory; no model session is canonical storage.
+
+## D-015 — Required curated ECC profile
+
+- **Decision:** Include three reviewed ECC instruction adaptations pinned to `8321021c54d670126ce3b2969d5deb880b4b0c2a`, with license and source/local hashes.
+- **Reason:** The owner requires ECC; selected retrieval, compaction and verification patterns are useful without importing an unreviewed hook/install surface.
+- **Consequence:** No upstream executable, GateGuard, installer or lifecycle hook is activated. NEO authorization remains independent. Additional modules require review.
+
+## D-016 — Skills do not manufacture access
+
+- **Decision:** Provide complete-loop, Agent-Reach, OpenClicky and paper-polishing skills with explicit activation/evidence boundaries.
+- **Reason:** A skill file does not connect a Mac desktop, enroll a phone or authenticate social accounts.
+- **Consequence:** Device/account activation proceeds only from observed host state. No fabricated delegation, credential export, public social action or paid fallback.
+
+## D-017 — Reuse real schedules
+
+- **Decision:** Update the existing Upgrade Watch to hourly and resume the existing Weekly Evolution for Monday around 09:00 America/New_York, including new-feature research.
+- **Reason:** The owner requested continuous improvement and a scheduled feature search; duplicate schedules would waste work.
+- **Consequence:** Future research deduplicates sources, measures safety/quality/cost/latency and prepares governed proposals. No automatic upstream installation, merge, deployment or spending.
+
+## D-018 — Current publication authorization
+
+- **Decision:** The owner's latest instruction to keep this framework documented on GitHub authorizes publishing this reviewed repository update.
+- **Reason:** The concrete scope is NEO-CORTEX code, configuration, skills and documentation developed in this cycle.
+- **Consequence:** Verify before publishing. This does not authorize a production deployment, private vault publication, account changes, spending or unrelated repository work.

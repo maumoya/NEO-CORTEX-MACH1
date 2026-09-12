@@ -11,7 +11,7 @@ export function CheckoutButton({ plan }: { plan: string }) {
     try {
       const response = await fetch('/api/checkout', {
         method: 'POST',
-        headers: { 'content-type': 'application/json', 'x-neo-cortex-user-approved': 'checkout' },
+        headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ plan })
       });
       const data = await response.json();

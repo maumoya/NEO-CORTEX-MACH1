@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { clerkConfigured } from '@/src/auth/config';
 import { executionModeFromEnvironment, assertMayMutateExternalState } from '@/src/core/kill-switch';
 import { validateIntentDecision } from '@/src/core/intent-gateway';
-import { evaluatePolicy } from '@/src/core/policy-kernel';
+import { evaluatePolicy, mayExecuteWithoutApproval } from '@/src/core/policy-kernel';
 
 const inputSchema = z.object({ plan: z.enum(['core', 'pro', 'operator']) });
 const priceEnv = { core: 'STRIPE_PRICE_CORE', pro: 'STRIPE_PRICE_PRO', operator: 'STRIPE_PRICE_OPERATOR' } as const;
@@ -22,9 +22,6 @@ export async function POST(request: Request) {
 
   const { userId } = await auth();
   if (!userId) return Response.json({ error: 'Authentication required.' }, { status: 401 });
-  if (request.headers.get('x-neo-cortex-user-approved') !== 'checkout') {
-    return Response.json({ error: 'Explicit checkout approval is required.' }, { status: 403 });
-  }
 
   const parsed = inputSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return Response.json({ error: 'Invalid plan.' }, { status: 400 });
@@ -45,6 +42,11 @@ export async function POST(request: Request) {
     intent, requestedCapabilities: ['network.outbound'], targetProvider: 'stripe', approvedProviders: ['stripe']
   });
   if (!policy.allowed) return Response.json({ error: 'Checkout denied by policy.', reasonCodes: policy.reasonCodes }, { status: 403 });
+  // A caller-controlled header cannot prove approval. Keep billing disabled until a
+  // server-verified, user/plan-bound, expiring, single-use approval flow is implemented.
+  if (!mayExecuteWithoutApproval(policy)) {
+    return Response.json({ error: 'Checkout is disabled until the server-side approval workflow is implemented.' }, { status: 403 });
+  }
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   const origin = trustedOrigin(request);

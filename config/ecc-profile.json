@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "profile": "neo-curated-ecc",
+  "repository": "https://github.com/affaan-m/ECC",
+  "commit": "8321021c54d670126ce3b2969d5deb880b4b0c2a",
+  "license": "MIT",
+  "licenseFile": "third-party/ECC-LICENSE",
+  "reviewedAt": "2026-09-12",
+  "scope": "locally-adapted-instruction-skills-only",
+  "hooksImported": false,
+  "upstreamExecutablesEnabled": false,
+  "modules": [
+    {
+      "upstreamPath": "skills/verification-loop/SKILL.md",
+      "upstreamSha256": "f0d56107f79e607d4de6c5543b8edfb1b58ab9ae4019b39831689cd91116543e",
+      "path": ".claude/skills/ecc-verification-loop/SKILL.md",
+      "sha256": "20ee7586c2e0f981182619e4b1a4dd19e3559a44adf09fdb4477d3769df21914"
+    },
+    {
+      "upstreamPath": "skills/iterative-retrieval/SKILL.md",
+      "upstreamSha256": "b453b16d3e36174b8487c05ab807d0321a66c2d058812b2ae129d82824183725",
+      "path": ".claude/skills/ecc-iterative-retrieval/SKILL.md",
+      "sha256": "62a00ab1d562f88fd3d7d76f7c73e6c2600acdd8f638c007918d677c75aa36cc"
+    },
+    {
+      "upstreamPath": "skills/strategic-compact/SKILL.md",
+      "upstreamSha256": "44a71c6dcc3fdde8061b8a78296c5d37233e4accc8cf3c794e29ac5b9f2eee28",
+      "path": ".claude/skills/ecc-strategic-compact/SKILL.md",
+      "sha256": "43f6a7aff5cdef67db83a83758a5a008709735893236019619ba13df2237c213"
+    }
+  ]
+}

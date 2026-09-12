@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "scheduler": "ChatGPT scheduled tasks",
+  "verifiedEnabledAt": "2026-09-12",
+  "schedules": [
+    { "name": "NEO-CORTEX Upgrade Watch", "frequency": "hourly", "delivery": "material-change-only", "scope": ["security", "patches", "models", "cost", "latency", "quality", "ECC", "Agent-Reach", "Graphify", "Obsidian", "OpenClicky", "cross-device"] },
+    { "name": "NEO-CORTEX Weekly Evolution", "frequency": "weekly", "day": "Monday", "hour": "09:00", "timezone": "America/New_York", "timing": "flexible-within-an-hour", "scope": ["new-features", "requirements-coverage", "governed-evaluated-improvements"] }
+  ],
+  "automaticUpstreamInstall": false,
+  "automaticMergeOrDeployment": false,
+  "paidInferenceEnabled": false,
+  "note": "Configuration receipt, not a local daemon. Existing schedules were updated, not duplicated. Future run success must be checked separately."
+}

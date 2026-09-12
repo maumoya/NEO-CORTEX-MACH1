@@ -1,9 +1,9 @@
 {
   "name": "neo-cortex-mach1",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "private": true,
-  "engines": {"node": ">=22"},
-  "scripts": {"dev":"next dev","build":"next build","start":"next start","typecheck":"tsc --noEmit","test":"npm run test:compile && node --test .test-dist/tests/*.test.js","test:compile":"tsc -p tsconfig.tests.json","scan:secrets":"node scripts/secret-scan.mjs","check:demo-boundary":"node scripts/check-demo-boundary.mjs","verify":"npm run scan:secrets && npm run check:demo-boundary && npm run typecheck && npm test && npm run build && npm audit --omit=dev --audit-level=moderate"},
+  "engines": {"node": ">=24.14 <25"},
+  "scripts": {"dev":"next dev","build":"next build","start":"next start","typecheck":"tsc --noEmit","test":"npm run test:compile && node --test .test-dist/tests/*.test.js tests/*.test.mjs","test:compile":"tsc -p tsconfig.tests.json","scan:secrets":"node scripts/secret-scan.mjs","check:demo-boundary":"node scripts/check-demo-boundary.mjs","test:smoke":"node scripts/smoke-built-app.mjs","check:ecc-profile":"node scripts/check-ecc-profile.mjs","verify":"npm run check:ecc-profile && npm run scan:secrets && npm run check:demo-boundary && npm run typecheck && npm test && npm run build && npm run test:smoke && npm audit --omit=dev --audit-level=moderate"},
   "dependencies": {"@ai-sdk/gateway":"4.0.75","@clerk/nextjs":"7.9.1","@openai/agents":"0.17.0","ai":"7.0.93","lucide-react":"1.41.0","next":"16.3.4","postgres":"3.4.9","react":"19.2.8","react-dom":"19.2.8","stripe":"22.6.1","zod":"4.5.4"},
   "devDependencies": {"@types/node":"26.4.1","@types/react":"19.2.18","@types/react-dom":"19.2.7","typescript":"7.0.2"}
 }

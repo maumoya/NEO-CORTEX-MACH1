@@ -1,12 +1,23 @@
 # Changelog
 
+## 0.4.0 — 2026-09-12 — Shared Brain and Safe Director
+- Reconciled recovered GPT context and all three owner-supplied documents into one architecture and implementation sequence: NEO-owned state, Obsidian knowledge workspace, Graphify derived index, shared device identity and optional Orbit pending exact identification.
+- Added opt-in `/api/agent` and `/console` for deterministic `status`/`next` operations with no inference or workload tools. SQLite records task/correlation IDs, actor-scoped idempotency, transactional lifecycle events, rate limits, integrity checks and conservative interrupted-work recovery.
+- Added HTTP authentication/admin/origin/input boundaries and disabled serverless runtime until shared durable storage is available.
+- Added 28 regression tests beyond the ten-test baseline, covering persistence across processes, concurrent duplicate requests, ownership, recovery, journal modifications, HTTP boundaries, invalid routing/budget numbers and unconditional demo labeling.
+- Corrected 0.3.1's approval claim: a caller-supplied Checkout header is not human approval evidence. Removed it and blocked Checkout while the required server-side approval workflow is absent.
+- Fixed unknown-price routing ties, invalid price/metadata handling and missing-provider restricted egress. Catalog requests now have a timeout and reject redirects.
+- Added a pinned, reviewed ECC instruction profile with MIT attribution, NEO verification/repair loops, Agent-Reach and OpenClicky worker skills, and the supplied paper-polishing workflow. No upstream executable/hook or new model provider was activated.
+- Recorded enabled hourly Upgrade Watch and Monday morning Weekly Evolution schedules; preserved historical upgrade proposals without claiming they were installed.
+- Aligned the runtime/CI on Node 24; updated state, decisions, next actions and learning coverage. Mac inspection, mobile enrollment and live account verification remain pending actual access.
+
 ## 0.3.1 — 2026-09-12 — Verification Baseline
 - Added persistent repository state, decision, and prioritized-next-action records.
 - Added a reproducible one-command verification gate covering secret patterns, TypeScript, core policy tests, production build, and dependency audit.
 - Added ten regression tests for high-risk approval, classified-data routing, autonomous-action denial, identity, budgets, sandboxing, checkpoints, safe mode, evolution quarantine, and deterministic model selection.
 - Replaced model-catalog first-match routing with deterministic tier preferences and a testable catalog-routing function.
 - Added a build gate that rejects product pages consuming seeded demo data without an explicit demo banner.
-- Bound Stripe Checkout creation to an authenticated user, explicit request-scoped approval, normal execution mode, and Policy Kernel decision; added Clerk route protection when configured.
+- Bound Stripe Checkout creation to an authenticated user, a caller-supplied approval header, normal execution mode, and Policy Kernel decision; added Clerk route protection when configured. **Corrected in 0.4.0:** the header was not trustworthy approval evidence and outstanding human approval was not enforced.
 - Added a least-privilege GitHub Actions workflow with commit-pinned actions.
 - Added the npm lockfile and accepted Next.js 16 generated TypeScript configuration for reproducible builds.
 

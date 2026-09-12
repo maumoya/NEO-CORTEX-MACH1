@@ -8,3 +8,7 @@ node_modules/
 .vercel/
 *.tsbuildinfo
 .test-dist/
+.neo-cortex/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
