@@ -1,10 +1,12 @@
 # NEO-CORTEX State
 
-Last updated: 2026-09-12 UTC  
+Last updated: 2026-09-13 UTC
 Canonical repository: `maumoya/NEO-CORTEX-MACH1`  
 Release snapshot: `0.4.0`
 Verified public baseline: `dc164dcaeb6f10c35c2bfff3706c3b9f382d0ef1` (0.3.1)
-Publication: 0.4.0 prepared under the owner's explicit GitHub instruction; final publication/CI receipt pending.
+Published implementation: `13c221cfbb0495eba9edc118e9ff65ab5a632147` (0.4.0).
+Verified tree: `322d6ff50a3c3ea3ee5d5b5423999289b950f240`, identical to the locally reviewed tree.
+Publication receipt: GitHub `main` fetched and compared successfully; [Verify run 34721933277](https://github.com/maumoya/NEO-CORTEX-MACH1/actions/runs/34721933277) completed successfully on that implementation commit. This documentation follow-up records the result.
 
 ## Evidence boundary
 
@@ -26,7 +28,7 @@ Four targeted GPT-context searches recovered partial historical excerpts. All th
 | Built-app HTTP smoke | PASS | Disabled console/runtime, labeled dashboards, unconfigured Checkout 503 and unauthenticated cron 401 |
 | Secret-pattern scan / dependency audit | PASS | No matched secret patterns; zero reported production dependency vulnerabilities |
 | Public 0.3.1 CI | PASS | Verify run 34715661764, commit dc164dc |
-| New release CI | PENDING PUBLICATION | Local verification passed; remote result must be checked after push |
+| New release CI | PASS | Verify run 34721933277 succeeded on exact implementation commit 13c221c |
 | Research schedules | VERIFIED ENABLED | Existing hourly Upgrade Watch and Monday around 09:00 America/New_York Weekly Evolution updated |
 | Live accounts / Mac / devices | NOT VERIFIED | No live Clerk, Stripe, OpenClicky, NIM or device enrollment test |
 
@@ -50,7 +52,7 @@ Tests and source scans are evidence for their stated cases, not proof of compreh
 | Self-healing | PARTIAL | Interrupted local tasks marked failed on next execution; no daemon, watchdog, replay scheduler or host recovery controller |
 | Observability | PARTIAL | Local hash-chained task events and row/index consistency; no external anchoring, full traces, alerts or live telemetry |
 | Documentation | UPDATED | Framework, runbook, all supplied source inputs, candidate queue, provenance and persistent state |
-| Git/GitHub | ACTIVE | Owner-authorized publication; pinned-action CI exists. Main is unprotected in observed metadata; commits unsigned |
+| Git/GitHub | PUBLISHED / CI PASS | Owner-authorized 0.4.0 implementation and identical tree verified; pinned-action CI passed. Main is unprotected in observed metadata; commits unsigned |
 | SaaS product | DEMO | Always-labeled metrics/CRM/revenue; real billing state, entitlements and data adapters absent |
 
 ## Material limitations
@@ -66,4 +68,4 @@ Tests and source scans are evidence for their stated cases, not proof of compreh
 
 ## Next execution boundary
 
-Complete publication/CI verification for this release, then follow the implementation sequence in the framework. Actual Mac attachment is required for inventory, OpenClicky delegation and local device activation. Private memory must remain outside this public repository.
+The repository implementation/publication/CI cycle is complete. Follow the implementation sequence in the framework. Actual Mac attachment is required for inventory, OpenClicky delegation and local device activation. Private memory must remain outside this public repository. Orbit still needs an exact project URL before evaluation.

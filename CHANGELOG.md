@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.4.0 — 2026-09-12 — Shared Brain and Safe Director
+- Publication verified: implementation commit `13c221c`, identical local/GitHub tree, and passing GitHub Verify run `34721933277`; receipt recorded 2026-09-13.
 - Reconciled recovered GPT context and all three owner-supplied documents into one architecture and implementation sequence: NEO-owned state, Obsidian knowledge workspace, Graphify derived index, shared device identity and optional Orbit pending exact identification.
 - Added opt-in `/api/agent` and `/console` for deterministic `status`/`next` operations with no inference or workload tools. SQLite records task/correlation IDs, actor-scoped idempotency, transactional lifecycle events, rate limits, integrity checks and conservative interrupted-work recovery.
 - Added HTTP authentication/admin/origin/input boundaries and disabled serverless runtime until shared durable storage is available.

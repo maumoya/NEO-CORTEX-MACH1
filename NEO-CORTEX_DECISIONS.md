@@ -1,6 +1,6 @@
 # NEO-CORTEX Decisions
 
-Last updated: 2026-09-12 UTC
+Last updated: 2026-09-13 UTC
 
 This is an append-only decision record. Superseded decisions stay visible and must point to their replacement.
 
@@ -111,3 +111,9 @@ This is an append-only decision record. Superseded decisions stay visible and mu
 - **Decision:** The owner's latest instruction to keep this framework documented on GitHub authorizes publishing this reviewed repository update.
 - **Reason:** The concrete scope is NEO-CORTEX code, configuration, skills and documentation developed in this cycle.
 - **Consequence:** Verify before publishing. This does not authorize a production deployment, private vault publication, account changes, spending or unrelated repository work.
+
+## D-019 — Verify the published artifact
+
+- **Decision:** Record the implementation commit separately from its documentation receipt.
+- **Evidence:** Published 0.4.0 commit `13c221cfbb0495eba9edc118e9ff65ab5a632147` has the exact locally reviewed tree `322d6ff50a3c3ea3ee5d5b5423999289b950f240`; GitHub Verify run `34721933277` completed successfully.
+- **Consequence:** This closes the repository build/test/publish/verify loop. It does not imply that Mac, Obsidian, Graphify, social accounts or mobile clients have been connected.

@@ -1,6 +1,6 @@
 # NEO-CORTEX Next
 
-Last updated: 2026-09-12 UTC
+Last updated: 2026-09-13 UTC
 
 Execution order follows `docs/AGENTIC-OS-FRAMEWORK.md`. One item is active at a time.
 
@@ -15,9 +15,11 @@ Execution order follows `docs/AGENTIC-OS-FRAMEWORK.md`. One item is active at a 
 - [x] Add reviewed ECC skills/provenance, complete-loop, Agent-Reach, OpenClicky and V8 paper-polishing skills.
 - [x] Update and enable existing hourly Upgrade Watch and weekly feature/evolution research schedules.
 - [x] Pass 38 regression tests, TypeScript, production build, built-app smoke, ECC/skill checks, secret scan and production dependency audit.
-- [ ] IN PROGRESS: publish the owner-authorized 0.4.0 tree and inspect GitHub CI on that exact commit.
+- [x] Publish the owner-authorized 0.4.0 tree (13c221c), compare it with the local tree and verify GitHub CI success (run 34721933277).
 
 ## P0 — Attach and verify the real host
+
+Current blocker: no Mac Terminal/desktop connection is attached to the supervisor session. No copy/paste relay is required or requested. Repository work above is complete; host activation must use an actual authorized connection.
 
 - [ ] Attach genuine Mac Terminal/desktop access; inspect every relevant checkout without overwriting local changes.
 - [ ] Inspect OpenClicky, NIM/model configuration and existing host skills/hooks without printing secrets.
