@@ -117,3 +117,9 @@ This is an append-only decision record. Superseded decisions stay visible and mu
 - **Decision:** Record the implementation commit separately from its documentation receipt.
 - **Evidence:** Published 0.4.0 commit `13c221cfbb0495eba9edc118e9ff65ab5a632147` has the exact locally reviewed tree `322d6ff50a3c3ea3ee5d5b5423999289b950f240`; GitHub Verify run `34721933277` completed successfully.
 - **Consequence:** This closes the repository build/test/publish/verify loop. It does not imply that Mac, Obsidian, Graphify, social accounts or mobile clients have been connected.
+
+## D-020 — Local Operator before full worker automation
+
+- **Decision:** Ship a separately gated, localhost-only Local Operator as the first daily-use NEO-CORTEX surface. It stages bounded OpenClicky work packets and private receipts but does not execute a worker.
+- **Reason:** The owner needs a practical Agentic OS immediately, while the actual OpenClicky application protocol and the supervisor's Mac access remain unverified. Guessing a desktop bridge would create false claims and uncontrolled privilege.
+- **Consequence:** The bootstrap can run without Clerk only on localhost with a private persistent directory. When Clerk is configured, administrator authentication is required. Task categories are read-only and fixed; direct OpenClicky launch, arbitrary prompts/tools, installs, secrets, network changes, social actions, financial actions, deployment, Git push, and edits remain outside this release.

@@ -12,6 +12,7 @@
   "include": [
     "src/core/**/*.ts",
     "src/runtime/**/*.ts",
+    "src/operator/**/*.ts",
     "src/evolution/policy.ts",
     "src/evolution/types.ts",
     "tests/**/*.ts"

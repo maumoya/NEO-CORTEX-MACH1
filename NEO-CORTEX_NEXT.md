@@ -16,12 +16,15 @@ Execution order follows `docs/AGENTIC-OS-FRAMEWORK.md`. One item is active at a 
 - [x] Update and enable existing hourly Upgrade Watch and weekly feature/evolution research schedules.
 - [x] Pass 38 regression tests, TypeScript, production build, built-app smoke, ECC/skill checks, secret scan and production dependency audit.
 - [x] Publish the owner-authorized 0.4.0 tree (13c221c), compare it with the local tree and verify GitHub CI success (run 34721933277).
+- [x] Implement and locally verify the 0.5 Local Operator: localhost-only, durable bounded OpenClicky work packets, idempotency, receipt integrity, UI, API, documentation, 41 regression tests and built-app smoke coverage.
+- [ ] Publish the owner-authorized 0.5 Local Operator tree, compare it with GitHub, and record the CI receipt.
 
 ## P0 — Attach and verify the real host
 
 Current blocker: no Mac Terminal/desktop connection is attached to the supervisor session. No copy/paste relay is required or requested. Repository work above is complete; host activation must use an actual authorized connection.
 
 - [ ] Attach genuine Mac Terminal/desktop access; inspect every relevant checkout without overwriting local changes.
+- [ ] Pull the published 0.5 release on the already verified Mac checkout; enable only local Operator mode and stage one default verification packet.
 - [ ] Inspect OpenClicky, NIM/model configuration and existing host skills/hooks without printing secrets.
 - [ ] Recover original bootstrap and verify code-signing/system-extension/disk/network gates; avoid blind large downloads.
 - [ ] Configure and verify the single-host Director on persistent private disk with real server-side admin identity.

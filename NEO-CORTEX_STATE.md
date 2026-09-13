@@ -2,15 +2,15 @@
 
 Last updated: 2026-09-13 UTC
 Canonical repository: `maumoya/NEO-CORTEX-MACH1`  
-Release snapshot: `0.4.0`
+Release snapshot: `0.5.0` (locally verified; GitHub publication pending)
 Verified public baseline: `dc164dcaeb6f10c35c2bfff3706c3b9f382d0ef1` (0.3.1)
 Published implementation: `13c221cfbb0495eba9edc118e9ff65ab5a632147` (0.4.0).
 Verified tree: `322d6ff50a3c3ea3ee5d5b5423999289b950f240`, identical to the locally reviewed tree.
-Publication receipt: GitHub `main` fetched and compared successfully; [Verify run 34721933277](https://github.com/maumoya/NEO-CORTEX-MACH1/actions/runs/34721933277) completed successfully on that implementation commit. This documentation follow-up records the result.
+Publication receipt: GitHub `main` fetched and compared successfully; [Verify run 34721933277](https://github.com/maumoya/NEO-CORTEX-MACH1/actions/runs/34721933277) completed successfully on the 0.4.0 implementation commit. The Local Operator release is locally verified and awaiting the same publication/CI receipt process.
 
 ## Evidence boundary
 
-The repository is available in a Linux development workspace, not on the owner's Mac mini. Mac filesystem, OpenClicky process/configuration/permissions, NIM model selection, phones and other devices remain unverified. Skill files do not confer computer-use access. No Mac delegation or paid inference occurred.
+The repository is available in a Linux development workspace, not through a live Mac mini connection. Owner-provided terminal screenshots show that a fresh 0.4.0 clone on the Mac mini completed `npm ci --ignore-scripts` and `npm run verify` after a local cache workaround. Mac filesystem beyond that checkout, OpenClicky process/configuration/permissions, NIM model selection, phones and other devices remain unverified. Skill files do not confer computer-use access. No Mac delegation or paid inference occurred.
 
 Four targeted GPT-context searches recovered partial historical excerpts. All three later supplied source documents were read and retained in `docs/source/`. This is not an exhaustive ChatGPT archive. The accepted synthesis is `docs/AGENTIC-OS-FRAMEWORK.md`; original executable bootstrap and exact Orbit project remain unavailable.
 
@@ -20,12 +20,12 @@ Four targeted GPT-context searches recovered partial historical excerpts. All th
 |---|---|---|
 | Dependency lock | PASS | Pinned install with lifecycle scripts disabled; Node 24.19 used, supported range >=24.14 <25 |
 | TypeScript / build | PASS | Production build includes /api/agent and /console |
-| Regression tests | PASS | 38 core, persistent-runtime, HTTP and demo-boundary tests |
+| Regression tests | PASS | 41 core, persistent-runtime, Local Operator HTTP/store, and demo-boundary tests |
 | Durable lifecycle | PASS | Separate-process reopen, competing-process duplicate reservation, terminal immutability and interrupted-work recovery |
 | Security boundaries | PASS within tested scope | Test identities, schema/origin/role gates, ownership, journal/index changes, finite budgets/prices and unresolved approval denial |
 | ECC profile | PASS | Upstream commit, MIT attribution and local skill digests; no upstream executables/hooks imported |
 | Skill validation | PASS | Seven project skill entrypoints validated |
-| Built-app HTTP smoke | PASS | Disabled console/runtime, labeled dashboards, unconfigured Checkout 503 and unauthenticated cron 401 |
+| Built-app HTTP smoke | PASS | Disabled Director/runtime, usable local Operator packet staging, labeled dashboards, unconfigured Checkout 503 and unauthenticated cron 401 |
 | Secret-pattern scan / dependency audit | PASS | No matched secret patterns; zero reported production dependency vulnerabilities |
 | Public 0.3.1 CI | PASS | Verify run 34715661764, commit dc164dc |
 | New release CI | PASS | Verify run 34721933277 succeeded on exact implementation commit 13c221c |
@@ -43,12 +43,12 @@ Tests and source scans are evidence for their stated cases, not proof of compreh
 | Models | PARTIAL | Catalog filtering, finite cost checks, deterministic ranking and timed fixed-origin fetch; NIM/local inference adapter pending |
 | Agents | PARTIAL | Deterministic admin Director accepts only status/next; council and general worker orchestration pending |
 | Memory | PARTIAL FOUNDATION | Durable local task journal; no operational personal/semantic/vector memory. Obsidian selected; Graphify planned derived index |
-| Tools | CONTRACTS | Static registry and Agent-Reach/OpenClicky skills; no runtime dispatch or authenticated platform adapter |
+| Tools | PARTIAL | Local Operator stages three bounded, read-only OpenClicky packets in a private local outbox; no runtime worker dispatch or authenticated platform adapter |
 | ECC environment | CURATED PROFILE READY | Three pinned instruction adaptations plus MIT license; host CLI/global settings and full plugin install not verified |
 | Security | PARTIAL | Auth/policy/input boundaries for Director; Checkout blocked without trusted approval. General broker/egress/sandbox enforcement pending |
 | Permissions | MAC UNKNOWN | No observed Accessibility, Screen Recording, Automation or Full Disk Access state |
 | Networking/devices | PLANNED | Private HTTPS, shared identity/workspace, device registration/revocation and thin clients documented; no devices enrolled |
-| Automation | PARTIAL | Real ChatGPT research schedules enabled; separate Vercel daily catalog cron remains narrow |
+| Automation | PARTIAL | Real ChatGPT research schedules enabled; Local Operator supports task staging but has no auto-dispatch or host daemon |
 | Self-healing | PARTIAL | Interrupted local tasks marked failed on next execution; no daemon, watchdog, replay scheduler or host recovery controller |
 | Observability | PARTIAL | Local hash-chained task events and row/index consistency; no external anchoring, full traces, alerts or live telemetry |
 | Documentation | UPDATED | Framework, runbook, all supplied source inputs, candidate queue, provenance and persistent state |
@@ -57,7 +57,7 @@ Tests and source scans are evidence for their stated cases, not proof of compreh
 
 ## Material limitations
 
-- Runtime is opt-in and disabled on Vercel until a shared durable store exists. Only its own task journal is writable; fixed workload operations have zero model calls/tools/spend.
+- The Safe Director remains opt-in and disabled on Vercel until a shared durable store exists. The separate Local Operator is local-only and can stage its own private outbox/receipt data; neither system runs a model, shell command, or worker automatically.
 - A hash chain can detect tested changes but cannot stop a database/host owner rewriting the entire chain or a consistent suffix. Backups, external anchors and migrations remain.
 - Admin HTTP tests inject synthetic identities; they do not prove a live Clerk account. Cancel/deadline behavior does not yet control a general subprocess worker.
 - Corrected the 0.3.1 Checkout approval-header claim. Credentials, normal mode and an allowed capability do not prove human approval.
@@ -68,4 +68,4 @@ Tests and source scans are evidence for their stated cases, not proof of compreh
 
 ## Next execution boundary
 
-The repository implementation/publication/CI cycle is complete. Follow the implementation sequence in the framework. Actual Mac attachment is required for inventory, OpenClicky delegation and local device activation. Private memory must remain outside this public repository. Orbit still needs an exact project URL before evaluation.
+The 0.5 Local Operator implementation is locally verified and awaiting publication/CI. On the Mac mini, pull that release, enable only the local Operator flag, and use `/operator` for the first bounded task handoff. Actual Mac attachment is still required for direct OpenClicky delegation, independent host verification, and device activation. Private memory must remain outside this public repository. Orbit still needs an exact project URL before evaluation.

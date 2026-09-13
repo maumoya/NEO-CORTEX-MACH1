@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 — 2026-09-13 — Local Operator
+- Added `/operator` and `POST /api/operator/tasks`: a practical, localhost-only task cockpit that stages private, bounded OpenClicky work packets without running a model, shell command, OpenClicky, or any external action.
+- Added three initial read-only task categories: inventory, repository verification, and source review. Every generated packet prohibits credential/cookie/Keychain access, installation, account/network/model changes, publishing, social activity, money movement, deployment, Git push, and edits.
+- Added a private `openclicky-outbox` with 0600 JSON packets, an integrity-checked local SQLite receipt journal, actor-scoped idempotency, strict input/time limits, same-origin request checks, and an explicit local-only configuration gate.
+- Added 0.5 regression and built-app smoke coverage. The UI makes clear that OpenClicky is not yet directly connected; a real adapter requires observed host/application evidence rather than a guessed protocol.
+
 ## 0.4.0 — 2026-09-12 — Shared Brain and Safe Director
 - Publication verified: implementation commit `13c221c`, identical local/GitHub tree, and passing GitHub Verify run `34721933277`; receipt recorded 2026-09-13.
 - Reconciled recovered GPT context and all three owner-supplied documents into one architecture and implementation sequence: NEO-owned state, Obsidian knowledge workspace, Graphify derived index, shared device identity and optional Orbit pending exact identification.
