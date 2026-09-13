@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.5.0 — 2026-09-13 — Local Operator
+- Publication verified: implementation commit `c7a63d3`, identical local/GitHub tree, and passing GitHub Verify run `34743109975`.
 - Added `/operator` and `POST /api/operator/tasks`: a practical, localhost-only task cockpit that stages private, bounded OpenClicky work packets without running a model, shell command, OpenClicky, or any external action.
 - Added three initial read-only task categories: inventory, repository verification, and source review. Every generated packet prohibits credential/cookie/Keychain access, installation, account/network/model changes, publishing, social activity, money movement, deployment, Git push, and edits.
 - Added a private `openclicky-outbox` with 0600 JSON packets, an integrity-checked local SQLite receipt journal, actor-scoped idempotency, strict input/time limits, same-origin request checks, and an explicit local-only configuration gate.

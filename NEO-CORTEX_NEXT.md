@@ -17,7 +17,7 @@ Execution order follows `docs/AGENTIC-OS-FRAMEWORK.md`. One item is active at a 
 - [x] Pass 38 regression tests, TypeScript, production build, built-app smoke, ECC/skill checks, secret scan and production dependency audit.
 - [x] Publish the owner-authorized 0.4.0 tree (13c221c), compare it with the local tree and verify GitHub CI success (run 34721933277).
 - [x] Implement and locally verify the 0.5 Local Operator: localhost-only, durable bounded OpenClicky work packets, idempotency, receipt integrity, UI, API, documentation, 41 regression tests and built-app smoke coverage.
-- [ ] Publish the owner-authorized 0.5 Local Operator tree, compare it with GitHub, and record the CI receipt.
+- [x] Publish the owner-authorized 0.5 Local Operator tree (c7a63d3), compare its exact tree with local (3da52e9), and verify GitHub CI success (run 34743109975).
 
 ## P0 — Attach and verify the real host
 

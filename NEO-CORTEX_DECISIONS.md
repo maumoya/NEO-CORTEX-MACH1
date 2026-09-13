@@ -123,3 +123,9 @@ This is an append-only decision record. Superseded decisions stay visible and mu
 - **Decision:** Ship a separately gated, localhost-only Local Operator as the first daily-use NEO-CORTEX surface. It stages bounded OpenClicky work packets and private receipts but does not execute a worker.
 - **Reason:** The owner needs a practical Agentic OS immediately, while the actual OpenClicky application protocol and the supervisor's Mac access remain unverified. Guessing a desktop bridge would create false claims and uncontrolled privilege.
 - **Consequence:** The bootstrap can run without Clerk only on localhost with a private persistent directory. When Clerk is configured, administrator authentication is required. Task categories are read-only and fixed; direct OpenClicky launch, arbitrary prompts/tools, installs, secrets, network changes, social actions, financial actions, deployment, Git push, and edits remain outside this release.
+
+## D-021 — Verify the Local Operator publication
+
+- **Decision:** Record the 0.5 implementation commit and its independent CI result before recommending that the Mac checkout consume it.
+- **Evidence:** GitHub `main` commit `c7a63d31cf2dec25c9f841362ed3ff75db07c6e9` has the exact reviewed tree `3da52e9169df65e344d9107c641c422ad25a113e`; GitHub Verify run `34743109975` completed successfully.
+- **Consequence:** The Local Operator repository release is verified. It remains a local task staging/handoff boundary, not proof of live OpenClicky execution, NIM inference, a phone client, or a Mac supervisor connection.

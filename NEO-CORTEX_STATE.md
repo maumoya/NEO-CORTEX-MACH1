@@ -2,11 +2,11 @@
 
 Last updated: 2026-09-13 UTC
 Canonical repository: `maumoya/NEO-CORTEX-MACH1`  
-Release snapshot: `0.5.0` (locally verified; GitHub publication pending)
+Release snapshot: `0.5.0`
 Verified public baseline: `dc164dcaeb6f10c35c2bfff3706c3b9f382d0ef1` (0.3.1)
 Published implementation: `13c221cfbb0495eba9edc118e9ff65ab5a632147` (0.4.0).
 Verified tree: `322d6ff50a3c3ea3ee5d5b5423999289b950f240`, identical to the locally reviewed tree.
-Publication receipt: GitHub `main` fetched and compared successfully; [Verify run 34721933277](https://github.com/maumoya/NEO-CORTEX-MACH1/actions/runs/34721933277) completed successfully on the 0.4.0 implementation commit. The Local Operator release is locally verified and awaiting the same publication/CI receipt process.
+Publication receipt: GitHub `main` now contains the Local Operator implementation as [`c7a63d3`](https://github.com/maumoya/NEO-CORTEX-MACH1/commit/c7a63d31cf2dec25c9f841362ed3ff75db07c6e9), with verified tree `3da52e9169df65e344d9107c641c422ad25a113e`. [Verify run 34743109975](https://github.com/maumoya/NEO-CORTEX-MACH1/actions/runs/34743109975) completed successfully on that exact commit. The earlier 0.4.0 receipt remains recorded above.
 
 ## Evidence boundary
 
@@ -28,7 +28,8 @@ Four targeted GPT-context searches recovered partial historical excerpts. All th
 | Built-app HTTP smoke | PASS | Disabled Director/runtime, usable local Operator packet staging, labeled dashboards, unconfigured Checkout 503 and unauthenticated cron 401 |
 | Secret-pattern scan / dependency audit | PASS | No matched secret patterns; zero reported production dependency vulnerabilities |
 | Public 0.3.1 CI | PASS | Verify run 34715661764, commit dc164dc |
-| New release CI | PASS | Verify run 34721933277 succeeded on exact implementation commit 13c221c |
+| 0.4 release CI | PASS | Verify run 34721933277 succeeded on exact implementation commit 13c221c |
+| 0.5 release CI | PASS | Verify run 34743109975 succeeded on exact implementation commit c7a63d3 |
 | Research schedules | VERIFIED ENABLED | Existing hourly Upgrade Watch and Monday around 09:00 America/New_York Weekly Evolution updated |
 | Live accounts / Mac / devices | NOT VERIFIED | No live Clerk, Stripe, OpenClicky, NIM or device enrollment test |
 
@@ -68,4 +69,4 @@ Tests and source scans are evidence for their stated cases, not proof of compreh
 
 ## Next execution boundary
 
-The 0.5 Local Operator implementation is locally verified and awaiting publication/CI. On the Mac mini, pull that release, enable only the local Operator flag, and use `/operator` for the first bounded task handoff. Actual Mac attachment is still required for direct OpenClicky delegation, independent host verification, and device activation. Private memory must remain outside this public repository. Orbit still needs an exact project URL before evaluation.
+The 0.5 Local Operator implementation is published and CI-verified. On the Mac mini, pull that release, enable only the local Operator flag, and use `/operator` for the first bounded task handoff. Actual Mac attachment is still required for direct OpenClicky delegation, independent host verification, and device activation. Private memory must remain outside this public repository. Orbit still needs an exact project URL before evaluation.
