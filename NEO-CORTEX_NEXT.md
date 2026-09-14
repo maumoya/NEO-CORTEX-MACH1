@@ -1,6 +1,6 @@
 # NEO-CORTEX Next
 
-Last updated: 2026-09-13 UTC
+Last updated: 2026-09-14 UTC
 
 Execution order follows `docs/AGENTIC-OS-FRAMEWORK.md`. One item is active at a time.
 
@@ -18,6 +18,7 @@ Execution order follows `docs/AGENTIC-OS-FRAMEWORK.md`. One item is active at a 
 - [x] Publish the owner-authorized 0.4.0 tree (13c221c), compare it with the local tree and verify GitHub CI success (run 34721933277).
 - [x] Implement and locally verify the 0.5 Local Operator: localhost-only, durable bounded OpenClicky work packets, idempotency, receipt integrity, UI, API, documentation, 41 regression tests and built-app smoke coverage.
 - [x] Publish the owner-authorized 0.5 Local Operator tree (c7a63d3), compare its exact tree with local (3da52e9), and verify GitHub CI success (run 34743109975).
+- [x] Prepare a review-only Local Operator hardening candidate: exact OpenClicky provenance, project-scoped realpath allowlists, host-header defense-in-depth, regression tests and rollback documentation.
 
 ## P0 — Attach and verify the real host
 
