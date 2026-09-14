@@ -45,8 +45,8 @@ try {
     idempotencyKey: 'smoke_operator_packet_001', kind: 'verification', title: 'Verify the built app',
     objective: 'Run the built app verification and report the observed result without changing files.', workspace: operatorWorkspace, timeLimitMinutes: 10
   }), signal: AbortSignal.timeout(3000) });
-  assert.equal(operator.status, 201);
   const operatorResult = await operator.json();
+  assert.equal(operator.status, 201, JSON.stringify(operatorResult));
   assert.match(operatorResult.packet.packetId, /^packet_/);
   assert.match(operatorResult.workerPrompt, /Do not access credentials/);
   assert.equal((await fetch(base + '/api/checkout', { method: 'POST', signal: AbortSignal.timeout(3000) })).status, 503);
