@@ -64,7 +64,7 @@ The API is enabled only when all conditions are true:
 - `NEXT_PUBLIC_APP_URL` is `localhost`, `127.0.0.1`, or `[::1]`;
 - `NEO_CORTEX_OPERATOR_WORKSPACE_ROOTS` is a non-empty JSON array of existing, project-scoped directories;
 - each submitted workspace resolves through `realpath` inside an allowed root, rejecting nonexistent paths and symlink escapes;
-- request URL, `Host`, optional forwarded host/protocol, and origin are consistent with that local URL; and
+- `Host`, optional forwarded host/protocol, and origin are consistent with that local URL; and
 - the execution kill switch is not `halted`.
 
 When Clerk is configured, administrator authentication is additionally required. Header validation is defense-in-depth, not an authentication or network boundary: a non-browser client can forge headers. Bind the process explicitly to `127.0.0.1`; this bootstrap mode must not be exposed with Tailscale Serve, Funnel, LAN binding, port forwarding, or a production hostname before its authentication model is upgraded.
