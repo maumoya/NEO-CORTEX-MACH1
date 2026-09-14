@@ -57,7 +57,6 @@ export async function handleOperatorHttp(request: Request, dependencies: Operato
     if (dependencies.mode.mode === 'halted') return response({ error: 'execution_halted' }, 423);
     const canonical = localCanonicalUrl(dependencies.appUrl);
     if (!canonical) return response({ error: 'local_canonical_app_url_required' }, 503);
-    if (new URL(request.url).host.toLowerCase() !== canonical.host.toLowerCase()) return response({ error: 'request_host_not_allowed' }, 403);
     if (request.headers.get('host')?.toLowerCase() !== canonical.host.toLowerCase()) return response({ error: 'host_not_allowed' }, 403);
     const forwardedHost = request.headers.get('x-forwarded-host');
     if (forwardedHost && forwardedHost.toLowerCase() !== canonical.host.toLowerCase()) return response({ error: 'forwarded_host_not_allowed' }, 403);
