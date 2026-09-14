@@ -2,7 +2,7 @@
 
 ## Unreleased — Local Operator boundary hardening
 - Require a non-empty JSON allowlist of existing project workspace roots before Local Operator can stage a packet; canonicalize submitted directories and reject nonexistent paths, filesystem/home roots, out-of-scope paths and symlink escapes.
-- Require request URL, `Host`, optional forwarded host/protocol and `Origin` consistency with the configured loopback URL as defense-in-depth. Explicit loopback binding and authentication remain the real boundaries.
+- Require `Host`, optional forwarded host/protocol and `Origin` consistency with the configured loopback URL as defense-in-depth. Explicit loopback binding and authentication remain the real boundaries.
 - Pin OpenClicky evaluation provenance to reviewed upstream commit `e9eb06a`, record its MIT license and broad permission/supply-chain risks, and retain `not-connected` / `executableEnabled=false`.
 - Add regression coverage for workspace confinement and host/forwarded-header mismatch. No dependency, credential, inference, worker execution or deployment change.
 
