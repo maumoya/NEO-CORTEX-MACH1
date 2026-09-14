@@ -1,5 +1,5 @@
 import type { ExecutionModeState } from '../core/kill-switch';
-import { localCanonicalUrl } from './config';
+import { localCanonicalUrl, resolveOperatorWorkspace } from './config';
 import { OperatorFault, operatorPacketRequestSchema, type OperatorPacket } from './contracts';
 import type { OperatorPacketStore } from './packet';
 
@@ -9,6 +9,7 @@ export interface OperatorHttpDependencies {
   getActor: () => Promise<{ id: string; authenticated: boolean; role: 'admin' | 'viewer' | 'operator' | 'agent' } | null>;
   openStore: () => OperatorPacketStore;
   mode: ExecutionModeState;
+  workspaceRoots: readonly string[];
   appUrl?: string;
 }
 
@@ -56,6 +57,11 @@ export async function handleOperatorHttp(request: Request, dependencies: Operato
     if (dependencies.mode.mode === 'halted') return response({ error: 'execution_halted' }, 423);
     const canonical = localCanonicalUrl(dependencies.appUrl);
     if (!canonical) return response({ error: 'local_canonical_app_url_required' }, 503);
+    if (request.headers.get('host')?.toLowerCase() !== canonical.host.toLowerCase()) return response({ error: 'host_not_allowed' }, 403);
+    const forwardedHost = request.headers.get('x-forwarded-host');
+    if (forwardedHost && forwardedHost.toLowerCase() !== canonical.host.toLowerCase()) return response({ error: 'forwarded_host_not_allowed' }, 403);
+    const forwardedProto = request.headers.get('x-forwarded-proto');
+    if (forwardedProto && forwardedProto.toLowerCase() !== canonical.protocol.slice(0, -1)) return response({ error: 'forwarded_proto_not_allowed' }, 403);
     if (request.headers.get('origin') !== canonical.origin) return response({ error: 'origin_not_allowed' }, 403);
     if (request.headers.get('content-type')?.split(';')[0].trim().toLowerCase() !== 'application/json') {
       return response({ error: 'json_content_type_required' }, 415);
@@ -63,6 +69,8 @@ export async function handleOperatorHttp(request: Request, dependencies: Operato
     const input = await readBody(request);
     const parsed = operatorPacketRequestSchema.safeParse(input);
     if (!parsed.success) return response({ error: 'invalid_operator_request' }, 400);
+    const workspace = resolveOperatorWorkspace(parsed.data.workspace, dependencies.workspaceRoots);
+    if (!workspace) return response({ error: 'workspace_not_allowed' }, 403);
     let actorId = 'local-owner-bootstrap';
     if (dependencies.authConfigured) {
       const actor = await dependencies.getActor();
@@ -71,7 +79,7 @@ export async function handleOperatorHttp(request: Request, dependencies: Operato
       actorId = actor.id;
     }
     store = dependencies.openStore();
-    const result = store.stage(actorId, parsed.data);
+    const result = store.stage(actorId, { ...parsed.data, workspace });
     return response({ packet: result.packet, receipt: result.receipt, replayed: result.replayed, workerPrompt: workerPrompt(result.packet) }, result.replayed ? 200 : 201);
   } catch (error) {
     const code = error instanceof OperatorFault ? error.code : 'operator_unavailable';

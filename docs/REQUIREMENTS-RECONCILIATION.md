@@ -1,6 +1,6 @@
 # Agentic OS requirement reconciliation
 
-Review date: 2026-09-12. Baseline: public commit `dc164dc` (0.3.1).
+Review date: 2026-09-14. Baseline: public commit `ce124b5` (0.5.0).
 
 ## Coverage and evidence rules
 
@@ -20,7 +20,7 @@ Evidence labels:
 | ID | Source and strength | Requirement | Verified baseline / disposition |
 |---|---|---|---|
 | R01 | CURRENT; REPO migration manifest; recovered Sep 6 request | Standalone `maumoya/NEO-CORTEX-MACH1`; preserve unrelated projects | Correct root verified. Do not touch `realestateos-staging` or BLE sources. Old-copy deletion is not authorized in this change. |
-| R02 | CURRENT; recovered Sep 12 OpenClicky handoff | Supervisor directs OpenClicky, independently verifies outputs; stop pursuing experimental MCP bridge | Mac bridge absent. No simulated delegation or new MCP installation. MyClicky is superseded by the current explicit OpenClicky choice. |
+| R02 | CURRENT; recovered Sep 12 OpenClicky handoff | Supervisor directs OpenClicky, independently verifies outputs; stop pursuing experimental MCP bridge | Mac bridge absent. No simulated delegation or new MCP installation. MyClicky is superseded by the explicit OpenClicky choice. Exact upstream source, commit and MIT license are recorded; execution remains quarantined pending host identity, permission and artifact verification. Local packets now accept only real paths inside configured project roots. |
 | R03 | RECOVERED Sep 7 safe-runtime patch and Sep 12 handoff | Read-only Director, task/correlation IDs, at most 8 turns, zero tool calls, safe-mode tests, `/api/agent`, `/console` | Missing at baseline. Implement a deterministic, zero-inference runtime first. The older OpenAI SDK proposal is not permission to enable paid API use. |
 | R04 | CURRENT; REPO agent/security contracts | Deterministic policy above model/tool output; no self-approval, secret disclosure, or uncontrolled mutation | Contracts existed, but the Checkout header was not trustworthy approval evidence. Correct claims and fail closed where approval evidence is missing. |
 | R05 | RECOVERED framework summaries; REPO learning register | Durable tasks, memory independent of model context, restart recovery | In-memory checkpoints only. First increment: local SQLite task metadata and integrity-checked receipts, not full RAG or persistent personal memory. |
@@ -47,6 +47,7 @@ Evidence labels:
 3. The Director may update its own bounded task journal. “Read-only” refers to workload capabilities: no arbitrary filesystem, process, network, credential, payment, or publishing tools.
 4. Agent endpoints require server-verified administrator identity. Unconfigured authentication is not demo access to the runtime.
 5. Keep every unimplemented requirement above visible; do not equate a policy document, proposed SDK lane, or successful build with a working agent.
+6. Treat OpenClicky as a quarantined worker candidate: its broad macOS, filesystem, shell, network and computer-use capabilities never override NEO workspace confinement, approvals or Policy Kernel decisions.
 
 ## Next historical recovery
 

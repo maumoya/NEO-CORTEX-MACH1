@@ -21,13 +21,13 @@ This register keeps the Agentic OS Master Framework traceable. No accepted learn
 | Skill registry / creation | PARTIAL | Static integration register, pinned curated ECC profile and seven project skills; dynamic registry/generator remains |
 | Security scanner | PARTIAL | Scan policy exists; runtime toolchain integration remains |
 | Agent orchestrator + council | PARTIAL | Fixed-operation Director has durable lifecycle/idempotency; multi-agent orchestration/council remains |
-| Execution layer | PARTIAL | Capability policy, receipts, sandbox and kill switch contracts exist |
+| Execution layer | PARTIAL | Capability policy, receipts, sandbox and kill switch contracts exist; Local Operator now confines canonical workspace paths to configured roots |
 | Human approval | PARTIAL | Strong-risk actions are approval/deny gated; complete autonomy-level UX remains |
 | Data classification | PARTIAL | Canonical classes and routing enforcement exist; auto-classifier remains |
 | Secrets management | PARTIAL | Opaque lease contract + no-secret repo policy; vault/KMS adapter remains |
 | Audit / observability | PARTIAL | Local task journal with hash-chain/row checks; external audit anchoring and production traces remain |
 | Continual Improvement | PARTIAL | Evolution loop + watches + release intelligence exist |
-| Automated evaluation | PARTIAL | 38 core/runtime/HTTP/demo regressions, build, secret/audit and ECC profile checks; model/worker behavioral benchmark suite remains |
+| Automated evaluation | PARTIAL | 43 core/runtime/HTTP/demo regressions, including host and symlink-escape boundaries, plus build, secret/audit and ECC profile checks; model/worker behavioral benchmark suite remains |
 | Versioning / rollback / canary | PARTIAL | Git + release discipline and design; promotion controller remains |
 | Social Intelligence | PARTIAL | Agent-Reach skill and scope contract; reviewed executable and platform account activation remain |
 | Research Agent | PLANNED | Multi-source evidence agent remains |
@@ -77,3 +77,7 @@ Reject any change that violates provider independence, modular replacement, pers
 ## Owner extension accepted 2026-09-12
 
 Canonical synthesis: `AGENTIC-OS-FRAMEWORK.md`; detailed historical mapping: `REQUIREMENTS-RECONCILIATION.md`; all supplied technical inputs: `source/`. Shared identity/device access, Obsidian/Graphify, optional unresolved Orbit, required ECC workflows, bounded completion loops, Agent-Reach, OpenClicky and Paper V8 Polisher are retained. Hourly upgrade research and weekly feature/evolution schedules were verified enabled; this does not establish an always-running local worker.
+
+## Owner extension accepted 2026-09-14
+
+OpenClicky, not MyClicky, is the selected free local-worker candidate. Its exact source, reviewed commit and MIT license are recorded in `OPENCLICKY-PROVENANCE.md`; status remains quarantined/not connected. Local Operator workspaces are now required to resolve inside explicit project roots, and request host/forwarded-header checks were added as defense-in-depth. These controls do not prove a Mac binding or authorize worker execution.

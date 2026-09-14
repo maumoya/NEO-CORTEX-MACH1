@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { chmodSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { operatorAvailability } from '../src/operator/config';
+import { operatorAvailability, operatorWorkspaceRoots, resolveOperatorWorkspace } from '../src/operator/config';
 import { OperatorPacketStore } from '../src/operator/packet';
 
 const request = {
@@ -20,13 +20,25 @@ function setup(t: { after(fn: () => void): void }) {
   return { directory, store };
 }
 
-test('operator mode is explicit, local-only, and requires private persistent storage', () => {
+test('operator mode is explicit, local-only, and requires private persistent storage and workspace roots', t => {
+  const directory = mkdtempSync(join(tmpdir(), 'neo-operator-config-'));
+  const workspace = join(directory, 'workspace');
+  mkdirSync(workspace, { mode: 0o700 });
+  t.after(() => rmSync(directory, { recursive: true, force: true }));
+  const base = { NEO_CORTEX_OPERATOR_ENABLED: 'true', NEO_CORTEX_DATA_DIR: directory, NEXT_PUBLIC_APP_URL: 'http://127.0.0.1:3000' };
   assert.deepEqual(operatorAvailability({}), { enabled: false, reason: 'operator_disabled' });
   assert.deepEqual(operatorAvailability({ NEO_CORTEX_OPERATOR_ENABLED: 'true' }), { enabled: false, reason: 'persistent_data_directory_required' });
-  assert.deepEqual(operatorAvailability({ NEO_CORTEX_OPERATOR_ENABLED: 'true', NEO_CORTEX_DATA_DIR: '/operator/data', NEXT_PUBLIC_APP_URL: 'https://remote.example' }),
+  assert.deepEqual(operatorAvailability({ ...base, NEXT_PUBLIC_APP_URL: 'https://remote.example' }),
     { enabled: false, reason: 'local_canonical_app_url_required' });
-  assert.deepEqual(operatorAvailability({ NEO_CORTEX_OPERATOR_ENABLED: 'true', NEO_CORTEX_DATA_DIR: '/operator/data', NEXT_PUBLIC_APP_URL: 'http://127.0.0.1:3000' }),
+  assert.deepEqual(operatorAvailability(base), { enabled: false, reason: 'operator_workspace_roots_required' });
+  assert.deepEqual(operatorAvailability({ ...base, NEO_CORTEX_OPERATOR_WORKSPACE_ROOTS: '[]' }),
+    { enabled: false, reason: 'operator_workspace_roots_required' });
+  assert.deepEqual(operatorAvailability({ ...base, NEO_CORTEX_OPERATOR_WORKSPACE_ROOTS: JSON.stringify([workspace]) }),
     { enabled: true, reason: 'local_operator_configured' });
+  const roots = operatorWorkspaceRoots(JSON.stringify([workspace]));
+  assert.deepEqual(roots, [workspace]);
+  assert.equal(resolveOperatorWorkspace(workspace, roots ?? []), workspace);
+  assert.equal(resolveOperatorWorkspace(directory, roots ?? []), null);
 });
 
 test('operator stages a private bounded packet with idempotency and tamper evidence', t => {

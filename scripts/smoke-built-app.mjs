@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { chmodSync, mkdtempSync, rmSync } from 'node:fs';
+import { chmodSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -11,10 +11,13 @@ const port = 3219;
 const base = `http://127.0.0.1:${port}`;
 const operatorDataDir = mkdtempSync(join(tmpdir(), 'neo-operator-smoke-'));
 chmodSync(operatorDataDir, 0o700);
+const operatorWorkspace = join(operatorDataDir, 'workspace');
+mkdirSync(operatorWorkspace, { mode: 0o700 });
 const server = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'start', '-H', '127.0.0.1', '-p', String(port)], {
   env: { PATH: process.env.PATH, NODE_ENV: 'production', NEXT_TELEMETRY_DISABLED: '1',
     NEXT_PUBLIC_APP_URL: base, NEO_CORTEX_EXECUTION_MODE: 'safe', NEO_CORTEX_RUNTIME_ENABLED: 'false',
     NEO_CORTEX_OPERATOR_ENABLED: 'true', NEO_CORTEX_DATA_DIR: operatorDataDir,
+    NEO_CORTEX_OPERATOR_WORKSPACE_ROOTS: JSON.stringify([operatorWorkspace]),
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: '', CLERK_SECRET_KEY: '', ADMIN_USER_IDS: '', STRIPE_SECRET_KEY: '',
     STRIPE_WEBHOOK_SECRET: '', CRON_SECRET: '', DATABASE_URL: '', OPENAI_API_KEY: '', AI_GATEWAY_API_KEY: '' },
   stdio: ['ignore', 'ignore', 'ignore']
@@ -40,10 +43,10 @@ try {
   assert.deepEqual(await agent.json(), { error: 'runtime_disabled' });
   const operator = await fetch(base + '/api/operator/tasks', { method: 'POST', headers: { origin: base, 'content-type': 'application/json' }, body: JSON.stringify({
     idempotencyKey: 'smoke_operator_packet_001', kind: 'verification', title: 'Verify the built app',
-    objective: 'Run the built app verification and report the observed result without changing files.', workspace: '~/Developer/NEO-CORTEX-MACH1', timeLimitMinutes: 10
+    objective: 'Run the built app verification and report the observed result without changing files.', workspace: operatorWorkspace, timeLimitMinutes: 10
   }), signal: AbortSignal.timeout(3000) });
-  assert.equal(operator.status, 201);
   const operatorResult = await operator.json();
+  assert.equal(operator.status, 201, JSON.stringify(operatorResult));
   assert.match(operatorResult.packet.packetId, /^packet_/);
   assert.match(operatorResult.workerPrompt, /Do not access credentials/);
   assert.equal((await fetch(base + '/api/checkout', { method: 'POST', signal: AbortSignal.timeout(3000) })).status, 503);
